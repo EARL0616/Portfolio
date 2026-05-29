@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Earl R. Bolatete | QA Portfolio</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #1a1a2e;
+      --accent: #e94560;
+      --accent2: #0f3460;
+      --light: #f5f5f5;
+      --text: #333;
+      --muted: #666;
+      --card-bg: #ffffff;
+      --border: #e0e0e0;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--light);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent2) 100%);
+      color: #fff;
+      padding: 60px 24px 50px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      background: rgba(233,69,96,0.15);
+      top: -100px; right: -100px;
+    }
+    header::after {
+      content: '';
+      position: absolute;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.05);
+      bottom: -80px; left: -80px;
+    }
+    .avatar {
+      width: 120px; height: 120px;
+      border-radius: 50%;
+      border: 4px solid var(--accent);
+      object-fit: cover;
+      margin-bottom: 20px;
+      position: relative; z-index: 1;
+    }
+    .avatar-placeholder {
+      width: 120px; height: 120px;
+      border-radius: 50%;
+      border: 4px solid var(--accent);
+      background: rgba(255,255,255,0.15);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 48px;
+      margin: 0 auto 20px;
+      position: relative; z-index: 1;
+    }
+    header h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      letter-spacing: 1px;
+      position: relative; z-index: 1;
+    }
+    header h1 span { color: var(--accent); }
+    header p.title {
+      font-size: 1rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-top: 8px;
+      color: rgba(255,255,255,0.75);
+      position: relative; z-index: 1;
+    }
+    .header-contacts {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 20px;
+      position: relative; z-index: 1;
+    }
+    .header-contacts a {
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      font-size: 0.9rem;
+      display: flex; align-items: center; gap: 6px;
+      transition: color 0.2s;
+    }
+    .header-contacts a:hover { color: var(--accent); }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--primary);
+      display: flex;
+      justify-content: center;
+      gap: 4px;
+      padding: 0 16px;
+      position: sticky; top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+    nav a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      padding: 14px 18px;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: color 0.2s, border-bottom 0.2s;
+      border-bottom: 2px solid transparent;
+    }
+    nav a:hover { color: #fff; border-bottom-color: var(--accent); }
+
+    /* ── MAIN ── */
+    main { max-width: 960px; margin: 0 auto; padding: 48px 24px 80px; }
+
+    /* ── SECTION ── */
+    section { margin-bottom: 60px; }
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 2px;
+      background: linear-gradient(to right, var(--accent), transparent);
+    }
+
+    /* ── ABOUT ── */
+    .about-card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 32px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      border-left: 4px solid var(--accent);
+      font-size: 1.05rem;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    /* ── SKILLS ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+    }
+    .skill-card {
+      background: var(--card-bg);
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      border-top: 3px solid var(--accent);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .skill-card:hover { transform: translateY(-4px); box-shadow: 0 6px 20px rgba(0,0,0,0.1); }
+    .skill-icon { font-size: 1.8rem; margin-bottom: 10px; }
+    .skill-card h3 { font-size: 0.9rem; font-weight: 700; color: var(--primary); margin-bottom: 6px; }
+    .skill-card p { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
+
+    /* ── TOOLS ── */
+    .tools-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .tool-badge {
+      background: var(--primary);
+      color: #fff;
+      padding: 7px 16px;
+      border-radius: 50px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      transition: background 0.2s;
+    }
+    .tool-badge:hover { background: var(--accent); }
+    .tool-badge.accent { background: var(--accent); }
+
+    /* ── EXPERIENCE ── */
+    .timeline { position: relative; }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 18px; top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--accent), var(--accent2));
+    }
+    .timeline-item {
+      display: flex;
+      gap: 28px;
+      margin-bottom: 36px;
+      position: relative;
+    }
+    .timeline-dot {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff;
+      font-size: 1.1rem;
+      z-index: 1;
+      box-shadow: 0 0 0 4px rgba(233,69,96,0.2);
+    }
+    .timeline-content {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 24px;
+      flex: 1;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+    .timeline-content h3 { font-size: 1.05rem; font-weight: 700; color: var(--primary); }
+    .timeline-content .company {
+      font-size: 0.88rem;
+      color: var(--accent);
+      font-weight: 600;
+      margin: 4px 0;
+    }
+    .timeline-content .period {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 14px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .timeline-content ul { padding-left: 18px; }
+    .timeline-content ul li {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 6px;
+      line-height: 1.5;
+    }
+    .tag {
+      display: inline-block;
+      background: rgba(233,69,96,0.1);
+      color: var(--accent);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+
+    /* ── EDUCATION ── */
+    .edu-card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 28px 32px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+    .edu-icon {
+      font-size: 2.5rem;
+      flex-shrink: 0;
+    }
+    .edu-card h3 { font-size: 1.05rem; font-weight: 700; color: var(--primary); }
+    .edu-card .school { color: var(--accent); font-weight: 600; font-size: 0.9rem; margin: 4px 0; }
+    .edu-card .years { font-size: 0.82rem; color: var(--muted); }
+
+    /* ── CONTACT ── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px;
+    }
+    .contact-card {
+      background: var(--card-bg);
+      border-radius: 10px;
+      padding: 24px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      text-align: center;
+      border-bottom: 3px solid var(--accent);
+      transition: transform 0.2s;
+    }
+    .contact-card:hover { transform: translateY(-4px); }
+    .contact-card .icon { font-size: 2rem; margin-bottom: 10px; }
+    .contact-card h4 { font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+    .contact-card p, .contact-card a {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--primary);
+      text-decoration: none;
+    }
+    .contact-card a:hover { color: var(--accent); }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 28px;
+      background: var(--primary);
+      color: rgba(255,255,255,0.5);
+      font-size: 0.82rem;
+    }
+    footer span { color: var(--accent); }
+
+    @media (max-width: 600px) {
+      .timeline::before { left: 14px; }
+      .timeline-dot { width: 30px; height: 30px; font-size: 0.9rem; }
+      nav a { padding: 12px 10px; font-size: 0.75rem; }
+      .edu-card { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="avatar-placeholder">👤</div>
+  <h1>EARL R. <span>BOLATETE</span></h1>
+  <p class="title">Software Quality Assurance &nbsp;|&nbsp; Manual &amp; Automation</p>
+  <div class="header-contacts">
+    <a href="tel:09193649128">📞 09193649128</a>
+    <a href="mailto:earlbolatete4@gmail.com">✉️ earlbolatete4@gmail.com</a>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav>
+  <a href="#about">About</a>
+  <a href="#skills">Skills</a>
+  <a href="#tools">Tools</a>
+  <a href="#experience">Experience</a>
+  <a href="#education">Education</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<!-- MAIN -->
+<main>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <h2 class="section-title">About Me</h2>
+    <div class="about-card">
+      Detail-oriented Software QA Tester with <strong>3 years of experience</strong> in manual testing, test case creation, bug reporting, and test automation using Cypress and Playwright. Experienced in testing web applications across staging and production environments, collaborating in <strong>Agile teams</strong>, and delivering high-quality releases — backed by a solid IT support and troubleshooting background.
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <h2 class="section-title">Core Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-icon">🔍</div>
+        <h3>Manual Testing</h3>
+        <p>Smoke, regression, exploratory testing across staging &amp; production environments.</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🤖</div>
+        <h3>Test Automation</h3>
+        <p>Automation scripts using Cypress &amp; Playwright for critical user flows.</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🔗</div>
+        <h3>API Testing</h3>
+        <p>REST API testing and validation using Postman.</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🐛</div>
+        <h3>Bug Tracking</h3>
+        <p>Defect logging, tracking &amp; verification in Jira with clear reproduction steps.</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">📋</div>
+        <h3>Test Management</h3>
+        <p>Test case creation &amp; execution using Qase and Zephyr.</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🖥️</div>
+        <h3>Cross-Browser &amp; UI/UX</h3>
+        <p>Cross-browser compatibility and UI/UX testing with Hotjar analysis.</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">💻</div>
+        <h3>Basic Coding</h3>
+        <p>JavaScript, HTML, and CSS for writing and understanding test scripts.</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🛠️</div>
+        <h3>IT Support</h3>
+        <p>Network, hardware, software troubleshooting and on-site technical support.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOOLS -->
+  <section id="tools">
+    <h2 class="section-title">Tools &amp; Technologies</h2>
+    <div class="tools-grid">
+      <span class="tool-badge accent">Cypress</span>
+      <span class="tool-badge accent">Playwright</span>
+      <span class="tool-badge">Postman</span>
+      <span class="tool-badge">Jira</span>
+      <span class="tool-badge">Qase</span>
+      <span class="tool-badge">Zephyr</span>
+      <span class="tool-badge">Hotjar</span>
+      <span class="tool-badge">JavaScript</span>
+      <span class="tool-badge">HTML / CSS</span>
+      <span class="tool-badge">JAM</span>
+      <span class="tool-badge">GitHub Copilot</span>
+      <span class="tool-badge">Figma</span>
+      <span class="tool-badge">Adobe Photoshop</span>
+      <span class="tool-badge">Microsoft Excel</span>
+      <span class="tool-badge">Microsoft Word</span>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <h2 class="section-title">Work Experience</h2>
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-dot">💼</div>
+        <div class="timeline-content">
+          <h3>Mid-Level QA Tester <span class="tag">Current</span></h3>
+          <div class="company">CreativeX Co. Ltd. — Remote</div>
+          <div class="period">📅 February 2023 – Present</div>
+          <ul>
+            <li>Created and executed manual test cases for web applications across staging &amp; production environments.</li>
+            <li>Logged, tracked, and verified defects in Jira with clear reproduction steps.</li>
+            <li>Performed smoke, regression, and exploratory testing before releases.</li>
+            <li>Built Cypress &amp; Playwright automation scripts for critical user flows.</li>
+            <li>Collaborated with developers in an Agile environment and used Hotjar for UX analysis.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot">🧪</div>
+        <div class="timeline-content">
+          <h3>Junior QA Tester <span class="tag">Part-Time</span></h3>
+          <div class="company">GoTeam — Remote</div>
+          <div class="period">📅 2024</div>
+          <ul>
+            <li>Executed test cases, reported defects, and verified bug fixes.</li>
+            <li>Assisted with QA documentation and test reports.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot">🖧</div>
+        <div class="timeline-content">
+          <h3>IT Staff</h3>
+          <div class="company">FTC Group of Companies Corp. (Aeon Luxe Tower) — Davao City</div>
+          <div class="period">📅 October 2022 – January 2023</div>
+          <ul>
+            <li>Maintained building-wide network connectivity (IDF to MDU).</li>
+            <li>Supported servers, CCTV, biometric DTR, IP phones, and Outlook.</li>
+            <li>Provided on-site technical support for staff and guests.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot">🔧</div>
+        <div class="timeline-content">
+          <h3>IT Senior Support Staff</h3>
+          <div class="company">DSG Sons – Gaisano Mall of Davao</div>
+          <div class="period">📅 August 2020 – October 2022</div>
+          <ul>
+            <li>Supported POS systems, office equipment, and networks.</li>
+            <li>Installed and troubleshot operating systems, software, and hardware.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <h2 class="section-title">Education</h2>
+    <div class="edu-card">
+      <div class="edu-icon">🎓</div>
+      <div>
+        <h3>Bachelor of Science in Information Technology</h3>
+        <div class="school">Holy Cross of Davao College</div>
+        <div class="years">2015 – 2020</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <h2 class="section-title">Get In Touch</h2>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <div class="icon">📞</div>
+        <h4>Phone</h4>
+        <a href="tel:09193649128">09193649128</a>
+      </div>
+      <div class="contact-card">
+        <div class="icon">✉️</div>
+        <h4>Email</h4>
+        <a href="mailto:earlbolatete4@gmail.com">earlbolatete4@gmail.com</a>
+      </div>
+      <div class="contact-card">
+        <div class="icon">🌍</div>
+        <h4>Location</h4>
+        <p>Davao City, Philippines</p>
+      </div>
+      <div class="contact-card">
+        <div class="icon">💼</div>
+        <h4>Open To</h4>
+        <p>Remote / On-site</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>© 2026 <span>Earl R. Bolatete</span> · Software QA Engineer · Built for job opportunities</p>
+</footer>
+
+</body>
+</html>
