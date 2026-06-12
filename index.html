@@ -107,7 +107,6 @@
       font-size: 0.82rem;
       font-weight: 600;
       cursor: pointer;
-      backdrop-filter: blur(8px);
       transition: background 0.2s, transform 0.2s;
       display: flex; align-items: center; gap: 6px;
     }
@@ -434,7 +433,6 @@
 </head>
 <body>
 
-<button id="themeToggle" onclick="toggleTheme()"><span id="themeIcon">🌙</span> <span id="themeLabel">Dark</span></button>
 <button id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
 <header>
@@ -454,7 +452,7 @@
   <section id="about">
     <h2 class="section-title reveal">About Me</h2>
     <div class="about-card reveal reveal-delay-1">
-      I'm a Software QA Engineer with <strong>5+ years of experience</strong> in manual and automation testing. I help teams deliver bug-free web applications by writing test cases, automating critical flows using Cypress and Playwright, and tracking defects in Jira. I've led QA efforts within the team — setting standards, reviewing test coverage, and ensuring quality across every release. I adapt quickly to fast-paced environments, picking up new tools, workflows, and technologies as the role demands. I work well in <strong>Agile environments</strong> and I'm always focused on shipping quality software. Currently open to new QA opportunities — remote.
+      A Software QA Engineer with <strong>almost 5 years of experience</strong> in manual and automation testing. I help teams deliver bug-free web applications by writing test cases, automating critical flows using Cypress and Playwright, and tracking defects in Jira. I've led QA efforts within the team — setting standards, reviewing test coverage, and ensuring quality across every release. I adapt quickly to fast-paced environments, picking up new tools, workflows, and technologies as the role demands. I work well in <strong>Agile environments</strong> and I'm always focused on shipping quality software. Currently open to new QA opportunities — remote.
     </div>
   </section>
 
@@ -615,18 +613,26 @@
     btn.classList.toggle('show', window.scrollY > 400);
   });
 
+
+  // ── THEME TOGGLE BUTTON (injected to avoid stacking context issues) ──
+  const toggle = document.createElement('button');
+  toggle.id = 'themeToggle';
+  toggle.innerHTML = '<span id="themeIcon">🌙</span>';
+  toggle.onclick = toggleTheme;
+  document.body.appendChild(toggle);
+
   // ── THEME TOGGLE ──
   function toggleTheme() {
     const isDark = document.body.classList.toggle('dark');
     document.getElementById('themeIcon').textContent = isDark ? '☀️' : '🌙';
-    document.getElementById('themeLabel').textContent = isDark ? 'Light' : 'Dark';
+    
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
   }
   // Load saved theme
   if (localStorage.getItem('theme') === 'dark') {
     document.body.classList.add('dark');
     document.getElementById('themeIcon').textContent = '☀️';
-    document.getElementById('themeLabel').textContent = 'Light';
+    
   }
 
 </script>
